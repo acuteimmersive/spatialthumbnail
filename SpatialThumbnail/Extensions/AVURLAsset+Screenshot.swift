@@ -6,7 +6,7 @@
 //
 
 import AVKit
-import SwiftUICore
+import SwiftUI
 
 extension AVURLAsset {
     enum ScreenshotError: Error {

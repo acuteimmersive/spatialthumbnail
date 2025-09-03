@@ -13,6 +13,7 @@ extension CMTaggedBuffer
     enum DataError: Error {
         case NoCVPixelBuffer
         case CGImageCreationFailed
+        case CGImageCroppingFailed
         case NoJPEGImageRepresentation
     }
     
@@ -37,22 +38,32 @@ extension CMTaggedBuffer
     }
     
     /// Returns the `NSBitmapImageRep` created by way of the buffer's `CVPixelBuffer`. Throws if none.
+    /// - Parameters:
+    ///   - transform: the optional transform to apply to the buffer.
+    ///   - crop: the optional CGRect of the frame crop.
     /// - Returns: the bitmap image representation.
-    public func nsBitmapImageRep() throws -> NSBitmapImageRep {
+    public func nsBitmapImageRep(transform: CGAffineTransform? = nil, crop: CGRect? = nil) throws -> NSBitmapImageRep {
         let pixelBuffer = try cvPixelBuffer()
-        var image: CGImage?
-        VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &image)
-        guard let image else {
-            throw DataError.CGImageCreationFailed
+        
+        var image = CIImage(cvPixelBuffer: pixelBuffer)
+        if let transform {
+            image = image.transformed(by: transform)
         }
-        return NSBitmapImageRep(cgImage: image)
+        if var crop {
+            // CIImage coordinates are bottom left, therefore the Y coordinate must be inverted
+            crop.origin.y = image.extent.height - crop.maxY
+            image = image.cropped(to: crop)
+        }
+        return NSBitmapImageRep(ciImage: image)
     }
     
     /// Writes the contents of the buffer's `CVPixelBuffer` as a JPEG file to the specified URL. Throws if none.
     /// - Parameters:
     ///   - url: the URL to a file path where to write the file.
-    public func writeJPEG(to url: URL) throws {
-        let bits = try nsBitmapImageRep()
+    ///   - transform: the optional transform to apply to the buffer.
+    ///   - crop: the optional CGRect of the frame crop.
+    public func writeJPEG(to url: URL, transform: CGAffineTransform? = nil, crop: CGRect? = nil) throws {
+        let bits = try nsBitmapImageRep(transform: transform, crop: crop)
         guard let data = bits.representation(using: .jpeg, properties: [:]) else {
             throw DataError.NoJPEGImageRepresentation
         }

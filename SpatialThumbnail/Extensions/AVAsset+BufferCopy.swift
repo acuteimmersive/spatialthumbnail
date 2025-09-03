@@ -45,6 +45,14 @@ extension AVAsset
         return track
     }
     
+    /// Loads the video track's size, throws if none.
+    /// - Returns: the first video track's dimensions and preferred transform
+    public func loadSize() async throws -> (CGSize, CGAffineTransform) {
+        let track = try await loadVideoTrack()
+        let (naturalSize, preferredTransform) = try await track.load(.naturalSize, .preferredTransform)
+        return (naturalSize, preferredTransform)
+    }
+    
     /// Creates an `AVAssetReaderTrackOutput` for the video track, configured to read multiple video layers.
     /// - Returns: a ready to use AVAssetReaderTrackOutput.
     public func makeAssetReaderTrackOutput() async throws -> AVAssetReaderTrackOutput {

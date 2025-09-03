@@ -17,12 +17,18 @@ extension AVURLAsset {
     /// and combines them into a stereoscopic HEIC image file.
     /// - Parameters:
     ///   - time: the time of the frame that needs to be saved.
+    ///   - transform: the optional transform to apply to the buffer.
+    ///   - crop: the optional CGRect of the frame crop.
     ///   - callback: the optional closure to be executed when the screenshot call succeeds or fails.
     ///
     /// The bulk of this function runs in its own task thread.
-    public func screenshot(at time: CMTime, callback: sending ((Bool, String) -> Void)? = nil) {
+    public func screenshot(at time: CMTime, transform: CGAffineTransform? = nil, crop: CGRect? = nil, callback: sending ((Bool, String) -> Void)? = nil) {
         let timeStr = String(format: "%.0f", time.seconds * 1000)
-        let baseUrl = url.deletingPathExtension().appendingPathExtension(timeStr)
+        var baseUrl = url.deletingPathExtension()
+        baseUrl.appendPathExtension(timeStr)
+        if crop != nil {
+            baseUrl.appendPathExtension("cropped")
+        }
         let leftUrl = baseUrl.appendingPathExtension("left.jpg")
         let rightUrl = baseUrl.appendingPathExtension("right.jpg")
         let outputUrl = baseUrl.appendingPathExtension("heic")
@@ -38,7 +44,7 @@ extension AVURLAsset {
                     }
                     
                     let url = eye == .rightEye ? rightUrl : leftUrl
-                    try taggedBuffer.writeJPEG(to: url)
+                    try taggedBuffer.writeJPEG(to: url, transform: transform, crop: crop)
                     eyes += 1
                 }
                 

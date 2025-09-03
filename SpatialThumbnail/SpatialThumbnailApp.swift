@@ -13,5 +13,6 @@ struct SpatialThumbnailApp: App {
         WindowGroup {
             FrameSelector()
         }
+        .windowResizability(.contentSize)
     }
 }

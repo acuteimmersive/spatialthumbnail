@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		A2191F4A2CD4967700D5A625 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A2191F482CD4967700D5A625 /* LICENSE */; };
 		A2191F4B2CD4967700D5A625 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A2191F492CD4967700D5A625 /* README.md */; };
+		A2A55F232E6A4C87006A78E6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A55F222E6A4C87006A78E6 /* AVKit.framework */; };
+		A2A55F252E6A4C9A006A78E6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A55F242E6A4C9A006A78E6 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A2191ED92CD16C2A00D5A625 /* Spatial Thumbnail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spatial Thumbnail.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2191F482CD4967700D5A625 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A2191F492CD4967700D5A625 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A2A55F222E6A4C87006A78E6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		A2A55F242E6A4C9A006A78E6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -30,6 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A55F252E6A4C9A006A78E6 /* AVFoundation.framework in Frameworks */,
+				A2A55F232E6A4C87006A78E6 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +49,7 @@
 				A2191EDA2CD16C2A00D5A625 /* Products */,
 				A2191F482CD4967700D5A625 /* LICENSE */,
 				A2191F492CD4967700D5A625 /* README.md */,
+				A2A55F212E6A4C87006A78E6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,6 +59,15 @@
 				A2191ED92CD16C2A00D5A625 /* Spatial Thumbnail.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A2A55F212E6A4C87006A78E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A2A55F242E6A4C9A006A78E6 /* AVFoundation.framework */,
+				A2A55F222E6A4C87006A78E6 /* AVKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,7 +103,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					A2191ED82CD16C2A00D5A625 = {
 						CreatedOnToolsVersion = 16.0;
@@ -172,7 +188,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 687UMFX665;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -235,7 +253,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 687UMFX665;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -266,19 +286,20 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = 687UMFX665;
+				CURRENT_PROJECT_VERSION = 1.1.0;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Spatial Thumbnail";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "2025 Acute Immersive LLC";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acuteimmersive.spatialthumbnail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -297,19 +318,20 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = 687UMFX665;
+				CURRENT_PROJECT_VERSION = 1.1.0;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Spatial Thumbnail";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "2025 Acute Immersive LLC";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acuteimmersive.spatialthumbnail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

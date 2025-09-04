@@ -84,7 +84,7 @@ struct FrameSelector: View {
                 Toggle("Crop", systemImage: "crop", isOn: $crop)
                     .toggleStyle(.button)
                     .disabled(player.currentItem == nil)
-                    .onChange(of: crop) { _, crop in
+                    .onChange(of: crop) { _, _ in
                         cropOffset = .zero
                         cropWidth = 0
                         cropHeight = 0
@@ -100,7 +100,14 @@ struct FrameSelector: View {
             .padding()
             
             VideoPlayer(player: player) {
-                CropRectangle(playerSize: playerSize, playerScale: playerScale, cropOffset: $cropOffset, cropWidth: $cropWidth, cropHeight: $cropHeight)
+                CropRectangle(
+                    playerSize: playerSize,
+                    playerScale: playerScale,
+                    cropOffset: $cropOffset,
+                    cropWidth: $cropWidth,
+                    cropHeight: $cropHeight
+                )
+                .disabled(!crop)
             }
             .aspectRatio(contentMode: .fit)
             
@@ -145,7 +152,7 @@ struct FrameSelector: View {
         }
     }
     
-    // Take a screenshot of the current frame and save the spatial photo and left/right eyes
+    /// Takes a screenshot of the current frame and save the spatial photo and left/right eyes
     func takeScreenshot() {
         guard let asset = player.currentItem?.asset as? AVURLAsset else {
             status = .failure
